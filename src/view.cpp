@@ -136,14 +136,6 @@ int32_t view::xoff()
     return Max(0, m_lastpos.x - (m_bb.x - m_aa.x + 1) / 2 + m_shift.x + pan_x);
 }
 
-int32_t view::interpolated_xoff()
-{
-    if (!m_focus)
-        return pan_x;
-
-    return Max(0, (m_lastlastpos.x + m_lastpos.x) / 2 - (m_bb.x - m_aa.x + 1) / 2 + m_shift.x + pan_x);
-}
-
 int32_t view::yoff()
 {
     if (!m_focus)
@@ -152,21 +144,11 @@ int32_t view::yoff()
     return Max(0, m_lastpos.y - (m_bb.y - m_aa.y + 1) / 2 - m_shift.y + pan_y);
 }
 
-int32_t view::interpolated_yoff()
-{
-    if (!m_focus)
-        return pan_y;
-
-    return Max(0, (m_lastlastpos.y + m_lastpos.y) / 2 - (m_bb.y - m_aa.y + 1) / 2 - m_shift.y + pan_y);
-}
-
 // updates the camera position to follow the player
 void view::update_scroll()
 {
     if (!m_focus)
         return;
-
-    m_lastlastpos = m_lastpos;
 
     if (m_focus->x > m_lastpos.x)
         m_lastpos.x = Max(m_lastpos.x, m_focus->x - no_xright);
@@ -221,7 +203,6 @@ view::view(game_object *focus, view *Next, int number)
     no_xright = 0;
     no_ytop = 0;
     no_ybottom = 0;
-    m_lastlastpos = m_lastpos = focus ? ivec2(focus->x, focus->y) : ivec2(0);
     last_hp = last_ammo = -1;
     last_type = -1;
     tsecrets = secrets = 0;
@@ -1217,10 +1198,8 @@ int32_t view::get_view_var_value(int num)
         return pointer_y;
         break;
     case V_LAST_LAST_X:
-        return m_lastlastpos.x;
         break;
     case V_LAST_LAST_Y:
-        return m_lastlastpos.y;
         break;
     case V_FREEZE_TIME:
         return freeze_time;
@@ -1362,10 +1341,8 @@ int32_t view::set_view_var_value(int num, int32_t x)
         pointer_y = x;
         break;
     case V_LAST_LAST_X:
-        m_lastlastpos.x = x;
         break;
     case V_LAST_LAST_Y:
-        m_lastlastpos.y = x;
         break;
     case V_FREEZE_TIME:
         freeze_time = x;

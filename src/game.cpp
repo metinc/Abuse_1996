@@ -746,17 +746,8 @@ void Game::draw_map(view *v, bool interpolate, uint32_t elapsedMsFixed)
     else
         main_screen->dirt_off();
 
-    int32_t xoff, yoff;
-    if (interpolate)
-    {
-        xoff = v->interpolated_xoff();
-        yoff = v->interpolated_yoff();
-    }
-    else
-    {
-        xoff = v->xoff();
-        yoff = v->yoff();
-    }
+    int32_t xoff = v->xoff();
+    int32_t yoff = v->yoff();
 
     //  if(xoff > max_xoff) xoff = max_xoff;
     //  if(yoff > max_yoff) yoff = max_yoff;

@@ -531,7 +531,6 @@ static int climb_off_handler(game_object *o)
         o->last_y = o->y;
         o->controller()->pan_y += 28;
         o->controller()->m_lastpos.y -= 28;
-        o->controller()->m_lastlastpos.y = o->controller()->m_lastpos.y;
         o->set_state(stopped);
     }
     return 0;
@@ -616,7 +615,6 @@ static int climb_handler(game_object *o, int xm, int ym, int but)
             o->last_y = o->y;
             o->controller()->pan_y -= 28;
             o->controller()->m_lastpos.y += 28;
-            o->controller()->m_lastlastpos.y = o->controller()->m_lastpos.y;
             o->set_state((character_state)S_climb_on);
         }
         else if (o->yvel() >= 0 && (ym > 0 || (ym < 0 && yd > 8)))
