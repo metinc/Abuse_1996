@@ -21,7 +21,6 @@ endif()
 add_executable(abuse
     common.h
     lol/matrix.cpp lol/matrix.h
-    lol/timer.cpp lol/timer.h
     specache.cpp specache.h
     netcfg.cpp netcfg.h
     innet.cpp

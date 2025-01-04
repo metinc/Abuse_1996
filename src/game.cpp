@@ -1168,28 +1168,45 @@ void Game::request_level_load(std::string name)
 
 extern int start_doubled;
 
+/**
+ * A fade function parameterized by N:
+ *   N=1 => fade in
+ *   N=0 => fade out
+ *
+ * @param im    Optional image to display during the fade
+ * @param steps Number of steps in the fade
+ */
 template <int N> static void Fade(image *im, int steps)
 {
-    /* 25ms per step */
-    float const duration = 25.f;
+    const Uint32 duration = 25;
 
     palette *old_pal = pal->copy();
 
+    // If an image was given, clear the screen and blit the image at center
     if (im)
     {
         main_screen->clear();
-        main_screen->PutImage(im, ivec2(xres + 1, yres + 1) / 2 - im->Size() / 2);
+        main_screen->PutImage(im, ivec2((xres + 1 - im->Size().x) / 2, (yres + 1 - im->Size().y) / 2));
     }
 
-    for (Timer total; total.PollMs() < duration * steps;)
+    Uint64 start_ms = SDL_GetTicks64();
+
+    // Keep looping until we exceed total fade time (duration * steps)
+    while (true)
     {
+        Uint64 elapsed = (SDL_GetTicks64() - start_ms);
+
+        if (elapsed >= duration * steps)
+            break;
+
+        int i = static_cast<int>(elapsed / duration);
+
+        int v = (N ? (i + 1) : (steps - i)) * 256 / steps;
+
         uint8_t *sl1 = (uint8_t *)pal->addr();
         uint8_t *sl2 = (uint8_t *)old_pal->addr();
-        int i = (int)(total.PollMs() / duration);
-        int v = (N ? i + 1 : steps - i) * 256 / steps;
-
         for (int j = 0; j < 3 * 256; j++)
-            *sl1++ = (int)*sl2++ * v / 256;
+            *sl1++ = static_cast<uint8_t>((static_cast<int>(*sl2++) * v) >> 8);
 
         pal->load();
         wm->flush_screen();
@@ -1311,21 +1328,22 @@ void do_title()
 
         Event ev;
         ev.type = EV_SPURIOUS;
-        Timer total;
 
         // HACK: Disable wheel for now since it'll trigger skipping the intro
         wm->SetIgnoreWheelEvents(true);
 
+        Uint64 start_ms = SDL_GetTicks64();
+
         while (ev.type != EV_KEY && ev.type != EV_MOUSE_BUTTON)
         {
-            Timer frame;
-
             int hr = 1;
             if (settings.hires || settings.big_font)
                 hr = 2;
 
+            Uint64 elapsed = SDL_GetTicks64() - start_ms;
+
             // 120 ms per step
-            int i = (int)(total.PollMs() / 120.f);
+            Uint64 i = elapsed / 120;
 
             if (i >= 400)
                 break;
@@ -1345,7 +1363,6 @@ void do_title()
                 cache.sfx(lnumber_value(space_snd))->play(sfx_volume * 90 / 127);
 
             SDL_Delay(25);
-            frame.GetMs();
         }
 
         // HACK: And reenable them
