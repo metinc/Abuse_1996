@@ -27,6 +27,7 @@
 #include "jrand.h"
 #include "clisp.h"
 #include "dev.h"
+#include <SDL_timer.h>
 
 enum
 {
@@ -528,7 +529,6 @@ void show_stats()
         wm->flush_screen();
 
         //pause a bit
-        Timer now;
-        now.WaitMs(1000);
+        SDL_Delay(1000);
     }
 }

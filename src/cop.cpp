@@ -24,6 +24,7 @@
 #include "clisp.h"
 #include "ant.h"
 #include "dev.h"
+#include <SDL_timer.h>
 
 enum
 {
@@ -1175,8 +1176,7 @@ void *show_kills()
     }
 
     wm->flush_screen();
-    Timer now;
-    now.WaitMs(4000); // wait 4 seconds
+    SDL_Delay(4000); // wait 4 seconds
 
     return NULL;
 }

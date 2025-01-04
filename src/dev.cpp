@@ -41,6 +41,7 @@
 
 //AR
 #include "sdlport/setup.h"
+#include <SDL_timer.h>
 extern Settings settings;
 extern int get_key_binding(char const *dir, int i);
 //
@@ -254,8 +255,7 @@ int confirm_quit()
         else
         {
             // add timer so that quit dialog doesn't grab 100% of CPU
-            Timer tmp;
-            tmp.WaitMs(30);
+            SDL_Delay(10);
         }
     }
 

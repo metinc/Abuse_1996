@@ -29,7 +29,6 @@ class Timer
 
     float GetMs();
     float PollMs();
-    void WaitMs(float deltams);
 
   private:
     TimerData *data;

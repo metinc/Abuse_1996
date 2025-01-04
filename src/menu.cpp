@@ -42,6 +42,7 @@
 
 //AR
 #include "sdlport/setup.h"
+#include <SDL_timer.h>
 extern Settings settings;
 extern int get_key_binding(char const *dir, int i);
 //
@@ -250,8 +251,7 @@ int menu(void *args, JCFont *font) // reurns -1 on esc
         }
         else
         {
-            Timer tmp;
-            tmp.WaitMs(10);
+            SDL_Delay(10);
         }
 
     } while (!done);
@@ -807,8 +807,7 @@ void main_menu()
         else
         {
             // ECS - Added so that main menu doesn't grab 100% of CPU
-            Timer tmp;
-            tmp.WaitMs(30);
+            SDL_Delay(10);
         }
 
         if (new_time.diff_time(&start) > 10)

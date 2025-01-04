@@ -691,7 +691,7 @@ void setup(int argc, char **argv)
     printf("%s %s\n", "Abuse", "0.9a");
 
     // Initialize SDL with video and audio support
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_TIMER) < 0)
     {
         show_startup_error("Unable to initialize SDL : %s\n", SDL_GetError());
         exit(EXIT_FAILURE);

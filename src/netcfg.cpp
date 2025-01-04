@@ -25,6 +25,7 @@
 #include "dev.h"
 
 #include "net/sock.h"
+#include <SDL_timer.h>
 
 extern char const *get_login();
 net_configuration *main_net_cfg = NULL;
@@ -597,8 +598,7 @@ int net_configuration::input() // pulls up dialog box and input fileds
                     // No event waiting...  We can't wait for long, because we are
                     // pretending to broadcast.
                     // ECS - Added so waiting in dialog doesn't use 100% of CPU
-                    Timer tmp;
-                    tmp.WaitMs(5);
+                    SDL_Delay(5);
                 }
             }
 

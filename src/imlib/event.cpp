@@ -27,6 +27,7 @@
 #include "event.h"
 #include "video.h"
 #include "filter.h"
+#include <SDL2/SDL_timer.h>
 
 //
 // Constructor
@@ -77,11 +78,10 @@ void EventHandler::Get(Event &ev)
     // Sleep until there are events available
     while (!m_pending)
     {
-        Timer tmp;
         IsPending();
 
         if (!m_pending)
-            tmp.WaitMs(1);
+            SDL_Delay(1);
     }
 
     // Return first queued event if applicable

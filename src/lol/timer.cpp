@@ -150,9 +150,4 @@ float Timer::PollMs()
     return data->GetOrWait(0.0f, false);
 }
 
-void Timer::WaitMs(float deltams)
-{
-    (void)data->GetOrWait(deltams, false);
-}
-
 } /* namespace lol */

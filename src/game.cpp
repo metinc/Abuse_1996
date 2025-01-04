@@ -1183,7 +1183,6 @@ template <int N> static void Fade(image *im, int steps)
 
     for (Timer total; total.PollMs() < duration * steps;)
     {
-        Timer frame;
         uint8_t *sl1 = (uint8_t *)pal->addr();
         uint8_t *sl2 = (uint8_t *)old_pal->addr();
         int i = (int)(total.PollMs() / duration);
@@ -1194,7 +1193,7 @@ template <int N> static void Fade(image *im, int steps)
 
         pal->load();
         wm->flush_screen();
-        frame.WaitMs(duration);
+        SDL_Delay(duration);
     }
 
     if (N == 0)
@@ -1256,8 +1255,7 @@ void do_title()
         fade_in(cache.img(cache.reg("art/title.spe", "cdc_logo_hires", SPEC_IMAGE, 1)), 32);
     else
         fade_in(cache.img(cdc_logo), 32);
-    Timer tmp;
-    tmp.WaitMs(400);
+    SDL_Delay(400);
     fade_out(32);
 
     void *space_snd = LSymbol::FindOrCreate("SPACE_SND")->GetValue();
@@ -1346,7 +1344,7 @@ void do_title()
             if ((i % 5) == 0 && DEFINEDP(space_snd) && (sound_avail & SFX_INITIALIZED))
                 cache.sfx(lnumber_value(space_snd))->play(sfx_volume * 90 / 127);
 
-            frame.WaitMs(25.f);
+            SDL_Delay(25);
             frame.GetMs();
         }
 
@@ -2589,8 +2587,7 @@ int main(int argc, char *argv[])
 
         delete chat;
 
-        Timer tmp;
-        tmp.WaitMs(500);
+        SDL_Delay(500);
 
         delete small_render;
         small_render = NULL;
