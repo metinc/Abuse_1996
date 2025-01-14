@@ -50,7 +50,9 @@
 	    (with_object (get_object 0) (link_object player))
 	    (with_object player (progn
 				  (set_x otherx)
-				  (set_y othery)))))))
+				  (set_y othery)
+				  (set_last_x otherx)
+				  (set_last_y othery)))))))
 T)
 
 
@@ -81,7 +83,11 @@ T)
 		     (othery (with_object (get_object 0) (y))))
 		    (with_object (get_object 0) (link_object player))
 		    (with_object player
-		      (progn (set_x otherx) (set_y othery)))))))
+		      (progn
+			    (set_x otherx)
+				(set_y othery)
+				(set_last_x otherx)
+				(set_last_y othery)))))))
   T)
 
 (def_char TP_DOOR_INVIS

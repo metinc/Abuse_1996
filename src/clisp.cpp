@@ -226,6 +226,8 @@ void clisp_init() // call by lisp_init, defines symbols and functions
     add_c_function("y", 0, 0, 31);
     add_c_bool_fun("set_x", 1, 1, 32);
     add_c_bool_fun("set_y", 1, 1, 33);
+    add_c_bool_fun("set_last_x", 1, 1, 300);
+    add_c_bool_fun("set_last_y", 1, 1, 301);
     add_c_bool_fun("push_characters", 2, 2, 34);
 
     add_c_bool_fun("set_state", 1, 1, 37);
@@ -1287,6 +1289,18 @@ long c_caller(long number, void *args)
     case 33: {
         int32_t v = lnumber_value(CAR(args));
         current_object->y = v;
+        return 1;
+    }
+    break;
+    case 300: {
+        int32_t v = lnumber_value(CAR(args));
+        current_object->last_x = v;
+        return 1;
+    }
+    break;
+    case 301: {
+        int32_t v = lnumber_value(CAR(args));
+        current_object->last_y = v;
         return 1;
     }
     break;

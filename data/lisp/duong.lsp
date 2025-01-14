@@ -259,6 +259,8 @@ T)
 				(progn
 				  (set_x x)
 				  (set_y y)
+				  (set_last_x x)
+				  (set_last_y y)
 				  (setq is_teleporting 0)
 				  (user_fun SET_FADE_COUNT 0)
 				  ))
