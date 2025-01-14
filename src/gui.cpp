@@ -90,7 +90,7 @@ ifield *ico_switch_button::unlink(int id)
 
 void ico_switch_button::handle_event(Event &ev, image *screen, InputManager *im)
 {
-    if ((ev.type == EV_KEY && ev.key == 13) || (ev.type == EV_MOUSE_BUTTON && ev.mouse_button))
+    if ((ev.type == EV_KEY && ev.key == 13) || (ev.type == EV_MOUSE_BUTTON && ev.mouse_button == 0))
     {
         cur_but = cur_but->next;
         if (!cur_but)
@@ -131,7 +131,7 @@ extern int sfx_volume;
 
 void ico_button::handle_event(Event &ev, image *screen, InputManager *im)
 {
-    if ((ev.type == EV_KEY && ev.key == 13) || (ev.type == EV_MOUSE_BUTTON && ev.mouse_button))
+    if ((ev.type == EV_KEY && ev.key == 13) || (ev.type == EV_MOUSE_BUTTON && ev.mouse_button == 0))
     {
         int x1, y1, x2, y2;
         area(x1, y1, x2, y2);
