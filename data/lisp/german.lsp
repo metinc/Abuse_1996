@@ -69,7 +69,7 @@
          (setq jug_stat           "statisch? (1=ja,0=nein)")
          (setq rob_noturn         "nicht umdrehen (1=an)")
          (setq rob_hide           "verborg. Start (1=verborgen,0=sichtbar)")
-         (setq who_fdelay         "Feuererzög.")
+         (setq who_fdelay         "Feuerverzög.")
          (setq who_bdelay         "F-Stoßverzög.")
          (setq who_btotal         "F-Stoß total")
          (setq who_mxv            "max. xvel")
@@ -161,43 +161,42 @@
 	 (setq edit_top           "Bearbeiten")
 	 (setq window_top         "Fenster")
 	 (setq menu1_load         "Level laden")
-	 (setq menu1_save         "Level speichern (S)")
+	 (setq menu1_save         "Level speichern          (S)")
 	 (setq menu1_saveas       "Level speichern als")
 	 (setq menu1_savegame     "Spiel speichern")
 	 (setq menu1_new          "Neues Level")
 	 (setq menu1_resize       "Kartengröße ändern")
 	 (setq menu1_suspend      "Nicht-Spieler Lähmung an/aus")
-	 (setq menu1_toggle       "Spiel Modus an/aus (TAB)")
-	 (setq menu1_savepal      "Paletten speichern         ")
-	 (setq menu1_startc       "Cache-Profil starten   ")
-	 (setq menu1_endc         "Cache-Profil beenden     ")
-	 (setq menu1_quit         "Abbrechen      (ALT-X)")
+	 (setq menu1_toggle       "Spiel Modus an/aus     (TAB)")
+	 (setq menu1_savepal      "Paletten speichern")
+	 (setq menu1_startc       "Cache-Profil starten")
+	 (setq menu1_endc         "Cache-Profil beenden")
+	 (setq menu1_quit         "Beenden              (ALT-X)")
 
 	 (setq menu2_light        "Licht an/aus")
 	 (setq menu2_scroll       "Scrollrate festlegen")
-	 (setq menu2_center       "Spieler zentrieren   (c)")
+	 (setq menu2_center       "Spieler zentrieren     (C)")
 	 (setq menu2_addpal       "Palette hinzufügen")
-	 (setq menu2_delay        "Verzögerung an/aus (D)")
+	 (setq menu2_delay        "Verzögerung an/aus     (D)")
 	 (setq menu2_god          "Unverwundbar")
 	 (setq menu2_clear        "Waffen an/aus (Umschalt+Y)")
 	 (setq menu2_mscroll      "Mit Maus scrollen")
 	 (setq menu2_lock         "Palettenfenster festsetzen")
-	 (setq menu2_raise        "Vordergrund hervorheben ")
+	 (setq menu2_raise        "Vordergrund hervorheben")
 	 (setq menu2_names        "Objektnamen an/aus")
-	 (setq menu2_map          "Karte an/aus (m)")
-	 (setq menu2_view         "Blickwinkel ausschalten ")
-	 (setq menu2_light        "Autolicht an/aus")
-	 (setq menu2_fps          "Bildrate/Objektzahl zeigen ")
+	 (setq menu2_map          "Karte an/aus           (M)")
+	 (setq menu2_view         "Blickwinkel ausschalten")
+	 (setq menu2_fps          "Bildrate/Objektzahl zeigen")
 
-	 (setq menu3_fore         "Vordergrund  (f)")
-	 (setq menu3_back         "Hintergrund  (b)")
+	 (setq menu3_fore         "Vordergrund      (F)")
+	 (setq menu3_back         "Hintergrund      (B)")
 	 (setq menu3_layers       "Schichten zeigen (L)")
-	 (setq menu3_light        "Belichtung    (l)")
-	 (setq menu3_pal          "Paletten    (p)")
-	 (setq menu3_objs         "Objekte     (o)")
-	 (setq menu3_console      "Konsole     (-)")
-	 (setq menu3_toolbar      "Werkzeugleiste    (a)")
-	 (setq menu3_prof         "Profil     (P)")
+	 (setq menu3_light        "Belichtung       (L)")
+	 (setq menu3_pal          "Paletten         (P)")
+	 (setq menu3_objs         "Objekte          (O)")
+	 (setq menu3_console      "Konsole          (-)")
+	 (setq menu3_toolbar      "Werkzeugleiste   (A)")
+	 (setq menu3_prof         "Profil           (P)")
 	 (setq menu3_save         "Positionen speichern")
 
 
@@ -229,7 +228,7 @@
                    (3 "Hier Spiel speichern, Pfeiltaste (unten) drücken.")
                    (4 "Pfeiltaste (unten) drücken, um Plattform zu aktivieren.")
                    (5 "Rechten Mausknopf festhalten, um Spezialkräfte zu aktivieren.")
-                   (6 "Mit STRG oder EINFG wählen Sie Waffen aus.")
+                   (6 "Mit dem Mausrad oder den Tasten 1 bis 7 wählen Sie Waffen aus.")
                    (7 "Pfeiltaste (oben) drücken, um Leiter hochzuklettern.")
                    (8 "Für nächsten Level Pfeiltaste (unten) drücken.")
                    (9 "Auf versteckte Wände schießen, um sie zu zerstören.")
@@ -243,9 +242,9 @@
 	 ;(setq min_error       "Min Spielerzahl 1-8\nMin Spielerzahl sollte weniger oder gleich Max Spielerzahl sein ")  ; V-A changed, V-B deleted
 
 	 (setq port_error      "Spielzahl muß zwischen 1-9 sein.")       ; V-A changed
-	 (setq kill_error      "Abschüsse müssen zwischen 1-99 sein.")      ; V-A changed
+	 (setq kill_error      "Abschüsse müssen zwischen 1 und 99 sein.")      ; V-A changed
 	 (setq name_error      "Ungültiger Name")         ; V-B changed
-	 (setq game_error      "Ungültiger Spielname ")         ; V-B added
+	 (setq game_error      "Ungültiger Spielname")         ; V-B added
 	 (setq input_error     "Eingabefehler")
 	 (setq ok_button       "OK")
 	 (setq cancel_button   "ABBRECHEN")
@@ -255,10 +254,7 @@
 	 (setq use_port        "Spielzahl")
 	 (setq your_name       "Ihr Name")
 
-	 (setq max_error       "Max Spielerzahl muß größer als Min Spielerzahl sein.")
          (setq min_error       "Min. Spielerzahl 1-8")
-         (setq use_port        "Spielzahl")
-         (setq your_name       " Ihr Name:")
          (setq max_players     "Maximale Spielerzahl erreicht, bitte später versuchen.\n ")
          (setq net_not_reg     "Demoversion auf diesem Server nicht spielbar.\n")
          (setq min_wait        "Wartet auf %d zusätzliche Spieler!")
@@ -266,7 +262,7 @@
          (setq no_low_mem         (concatenate 'string "Nicht genügend Grundspeicher\n"
                                            "  Vorschläge...\n"
                                            "    - Startdiskette erstellen (Info im Handbuch)\n"
-                                           "    - TSR's u. für ABUSE nicht benötigte Treiber beseitigen\n"
+                                           "    - TSRs und für ABUSE nicht benötigte Treiber beseitigen\n"
                                            "    - Machen Sie mehr Speicher frei\n"))
 
          (setq no_mem    (concatenate 'string "Nicht genügend Speicher verfügbar\n"
@@ -286,8 +282,7 @@
          (setq Networking      "Netzwerk")
          (setq server          " Neues Netzwerkspiel")
          (setq client          " Spiel beitreten ")
-         (setq single_play     "   Allein spielen     ")
-	 (setq single_play     "    Netzspiel abbrechen ")  ; V-A
+         (setq single_play     "    Netzspiel abbrechen    ")
          (setq cancel_net      "      Abbrechen         ")
 
          (setq ic_return       "Zurück ins Spiel")
@@ -311,8 +306,8 @@
          (setq no_hirez        "High-Res. gibt es nur im Edit-Modus (-edit)")
          (setq no2             "-2 kann nicht mit -edit zusammen benutzt werden")
          (setq no_pals         "Paletten sind nicht definiert")
-         (setq unchop1         "ussage : unchop xsize ysize\n")
-         (setq size1           "ussage : size width height\n")
+         (setq unchop1         "usage : unchop xsize ysize\n")
+         (setq size1           "usage : size width height\n")
          (setq name_now        "Level-Name ist jetzt '%s'\n")
          (setq esave           "edit save : writing edit.lsp\n")
          (setq nd_player       "Spieler kann nicht gelöscht werden!\n")
@@ -361,7 +356,7 @@
                             "betreiben Sie auf diesem Server bitte die Shareware-Version\n"
                             "Beispiel : abuse -net irgendwie.irgendwo.net -share\n"))
 
-	 (setq thank_you "Danke, daß Sie Abuse spielten!\n\n")     ; V-A
+	 (setq thank_you "Danke, dass Sie Abuse gespielt haben!\n\n")     ; V-A
          (setq load_warn nil)
          (setq end_msg thank_you)
 

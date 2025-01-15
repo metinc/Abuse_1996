@@ -71,7 +71,7 @@
 	 (setq rob_hide           "Début caché (1=caché,0=visible)")
 	 (setq who_fdelay         "Délai du tir")
 	 (setq who_bdelay         "Délai de l'explosion")
-	 (setq who_btotal         " Dégâts de l'explosion ")
+	 (setq who_btotal         "Dégâts de l'explosion")
 	 (setq who_mxv            "Max xvel")
 	 (setq who_myv            "Max yvel")
 	 (setq wrob_fdelay        "Délai du tir")
@@ -185,7 +185,6 @@ plan \n"
 	 (setq menu2_names        "Activer/désactiver noms d'objets")
 	 (setq menu2_map          "Activer/désactiver carte        (?)")
 	 (setq menu2_view         "Activer/désactiver changement de vue")
-	 (setq menu2_light        "Activer/désactiver éclairage ambiant")
 	 (setq menu2_fps          "Afficher nombre d'objets")
 
 	 (setq menu3_fore         "Premier plan     (f)")
@@ -230,7 +229,7 @@ plan \n"
                    (3 "Appuyez sur la flèche bas pour sauvegarder le jeu")
                    (4 "Appuyez sur la flèche bas pour activer la plate-forme")
                    (5 "Appuyez sur bouton droit, maintenez pour utiliser un pouvoir")
-                   (6 "Utilisez les touches CTRL ou INSER pour sélectionner les armes")
+                   (6 "Utilisez la molette ou les touches 1 à 7 pour choisir une arme")
                    (7 "Appuyez sur la flèche haut pour monter aux échelles")
                    (8 "Appuyez sur la flèche bas pour activer !")
                    (9 "Tirez sur les parois destructibles pour les démolir")
@@ -258,7 +257,7 @@ plan \n"
 
 (setq max_players     "Le serveur a déjà atteint le nombre maximal de joueurs, ressayez plus tard\n")
          (setq net_not_reg     "Désolé, vous ne pouvez pas jouer au jeu sur le réseau avec une version démo\n")
-         (setq min_wait        "Veillez attendre pour %d participant(s) !")
+         (setq min_wait        "Veuillez attendre pour %d participant(s) !")
          (setq lev_complete    "Niveau terminé !")
          (setq no_low_mem         (concatenate 'string "Gestionnaire de mémoire : Pas assez de mémoire disponible\n"
                                            "  Suggestions...\n"
@@ -280,8 +279,7 @@ plan \n"
          (setq Networking      "Jeu sur réseau")
          (setq server          "Commencer nouveau jeu")
          (setq client          "Participer au jeu en cours ?")
-         (setq single_play     " Un seul joueur ")
-(setq single_play     "    Sortir du jeu sur réseau    ")  ; V-A
+         (setq single_play     "    Sortir du jeu sur réseau    ")  ; V-A
          (setq cancel_net      "      Annuler        ")
 
          (setq ic_return       "Retourner au jeu")
@@ -305,8 +303,8 @@ plan \n"
          (setq no_hirez        "La haute résolution n'est disponible qu'avec le mode éditer (-edit)")
          (setq no2             "Ne peut pas utiliser -2 avec -edit")
          (setq no_pals         "Aucune palette définie")
-         (setq unchop1         "ussage : unchop xsize ysize\n")
-         (setq size1           "ussage : taille largeur hauteur\n")
+         (setq unchop1         "usage : unchop xsize ysize\n")
+         (setq size1           "usage : taille largeur hauteur\n")
          (setq name_now        "Le niveau actuel est '%s'\n")
          (setq esave           "Editer sauvegarde : écriture de edit.lsp\n")
          (setq nd_player       "Impossible d'effacer joueur !\n")
@@ -344,7 +342,7 @@ plan \n"
          (setq SAVE            "SAUVEGARDER")   ; don't let this get too long
 
          (setq net_not_reg
-               (concatenate 'string "Vou disposez de la version COMMERCIALE D'ABUSE mais pas le serveur.\n"
+               (concatenate 'string "Vous disposez de la version COMMERCIALE D'ABUSE mais pas le serveur.\n"
                             "Demandez à l'opérateur du serveur de lancer l'option -share ou une meilleure option,\n"
                             "Achetez ABUSE, les jeux sur le réseau sont plus amusants parce que vous pouvez voler,\n"
                             "devenez invisible et disposez de plus d'armes pour vous sortir d'affaire\n"))
@@ -367,7 +365,7 @@ plan \n"
 
          (setq plot_start
                (concatenate 'string
-                            "Vous êtes Nick Vrenna. C'est l'année 2009.  A tort, vous avez été incarcéré "
+                            "Vous êtes Nick Vrenna. C'est l'année 2009. À tort, vous avez été incarcéré "
                             "dans une prison souterraine de haute surveillance où ont lieu des expériences génétiques "
 			    " illégales.\\n"
                             "Alan Blake, à la tête de la recherche scientifique, a isolé le gène qui provoque "
