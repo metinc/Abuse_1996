@@ -42,7 +42,7 @@
       (progn (with_object (bg)
 			  (progn
 			    (setq special_power FAST_POWER)
-	        ))
+	        (play_sound AMMO_SND 127 (x) (y))))
 	     nil) T))
 
 (defun fast_cache (type) (list nil (list fast_image)))
@@ -59,7 +59,7 @@
   (next_picture)
   (if (touching_bg)
       (progn
-	(with_object (bg) (setq special_power SNEAKY_POWER))
+	(with_object (bg) (setq special_power SNEAKY_POWER) (play_sound AMMO_SND 127 (x) (y)))
 	nil)
     T))
 
@@ -74,7 +74,7 @@
   (next_picture)
   (if (touching_bg)
       (progn
-	(with_object (bg) (setq special_power FLY_POWER))
+	(with_object (bg) (setq special_power FLY_POWER) (play_sound AMMO_SND 127 (x) (y)))
 	nil)
     T))
 
@@ -96,6 +96,7 @@
 	(with_object (bg)
 		     (progn
 		       (setq special_power HEALTH_POWER)
+           (play_sound HEALTH_UP_SND 127 (x) (y))
 		       (give_player_health 100)))
 	nil)
     T))
