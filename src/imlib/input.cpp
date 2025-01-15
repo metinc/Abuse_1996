@@ -506,7 +506,7 @@ info_field::info_field(int X, int Y, int ID, char const *info, ifield *Next)
     m_pos = ivec2(X, Y);
     id = ID;
     next = Next;
-    text = strdup(info);
+    text = info;
     w = -1;
 }
 
@@ -514,52 +514,77 @@ void info_field::area(int &x1, int &y1, int &x2, int &y2)
 {
     if (w == -1) // if we haven't calculated this yet
     {
-        int fw = wm->font()->Size().x, fh = wm->font()->Size().y, maxw = 0;
-        char *info = text;
-        for (w = fw, h = fh + 1; *info; info++)
+        int fw = wm->font()->Size().x, fh = wm->font()->Size().y;
+        w = 0;
+        h = fh + 1;
+
+        // Calculate width and height for UTF-8 text
+        int current_width = 0;
+        for (auto it = text.begin(); it != text.end();)
         {
-            if (w > maxw)
-                maxw = w;
-            if (*info == '\n')
+            if (*it == '\n')
             {
                 h += fh + 1;
-                w = 1;
+                w = std::max(w, current_width);
+                current_width = 0;
+            }
+            else if ((unsigned char)*it >= 0x80)
+            {
+                // Skip UTF-8 continuation bytes
+                if ((unsigned char)*it == 0xC3)
+                    ++it;
+                current_width += fw;
             }
             else
-                w += fw;
+            {
+                current_width += fw;
+            }
+            ++it;
         }
-        w = maxw;
+        w = std::max(w, current_width);
     }
+
     x1 = m_pos.x;
     y1 = m_pos.y;
     x2 = m_pos.x + w;
     y2 = m_pos.y + h;
 }
 
-void info_field::put_para(image *screen, char const *st, int dx, int dy, int xspace, int yspace, JCFont *font,
+void info_field::put_para(image *screen, std::string_view st, int dx, int dy, int xspace, int yspace, JCFont *font,
                           int color)
 {
     int ox = dx;
-    while (*st)
+    auto line_start = st.begin();
+    auto it = st.begin();
+    const auto end = st.end();
+
+    while (it != end)
     {
-        if (*st == '\n')
+        // Find next newline
+        while (it != end && *it != '\n')
+            ++it;
+
+        // Print current line
+        font->PutString(screen, ivec2(dx, dy), std::string_view(&*line_start, it - line_start), color);
+
+        if (it != end && *it == '\n')
         {
-            dx = ox;
+            // Move to next line
             dy += yspace;
+            dx = ox;
+            ++it; // Skip the newline character
+            line_start = it;
         }
-        else
-        {
-            font->PutChar(screen, ivec2(dx, dy), *st, color);
-            dx += xspace;
-        }
-        st++;
     }
 }
 
 void info_field::draw_first(image *screen)
 {
+    // Draw shadow
     put_para(screen, text, m_pos.x + 1, m_pos.y + 1, wm->font()->Size().x, wm->font()->Size().y, wm->font(),
              wm->black());
+
+    // Draw text
     put_para(screen, text, m_pos.x, m_pos.y, wm->font()->Size().x, wm->font()->Size().y, wm->font(),
              wm->bright_color());
 }

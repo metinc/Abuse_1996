@@ -11,6 +11,8 @@
 #ifndef __FONTS_HPP_
 #define __FONTS_HPP_
 
+#include <string>
+#include <string_view>
 #include "image.h"
 #include "transimage.h"
 
@@ -20,14 +22,15 @@ class JCFont
     JCFont(image *letters);
     ~JCFont();
 
-    void PutChar(image *screen, ivec2 pos, char ch, int color = -1);
-    void PutString(image *screen, ivec2 pos, char const *st, int color = -1);
+    void PutChar(image *screen, ivec2 pos, unsigned char ch, int color = -1);
+    void PutString(image *screen, ivec2 pos, std::string_view text, int color = -1);
     ivec2 Size() const
     {
         return m_size;
     }
 
   private:
+    static unsigned char MapUTF8Char(std::string_view::iterator &it, const std::string_view::iterator &end);
     ivec2 m_size;
     TransImage *m_data[256];
 };

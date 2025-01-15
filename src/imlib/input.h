@@ -127,9 +127,8 @@ class text_field : public ifield
 
 class info_field : public ifield
 {
-    char *text;
     int w, h;
-    void put_para(image *screen, char const *st, int dx, int dy, int xspace, int yspace, JCFont *font, int color);
+    void put_para(image *screen, std::string_view st, int dx, int dy, int xspace, int yspace, JCFont *font, int color);
 
   public:
     info_field(int X, int Y, int ID, char const *info, ifield *Next);
@@ -148,7 +147,7 @@ class info_field : public ifield
     }
     virtual char *read()
     {
-        return text;
+        return text.data();
     }
     virtual int selectable()
     {
@@ -156,8 +155,10 @@ class info_field : public ifield
     }
     virtual ~info_field()
     {
-        free(text);
     }
+
+  private:
+    std::string text;
 };
 
 #endif

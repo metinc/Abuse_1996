@@ -113,13 +113,10 @@ int text_draw(int y, int x1, int y1, int x2, int y2, char const *buf, JCFont *fo
         }
         else
         {
-            while (word_len--)
-            {
-                font->PutChar(main_screen, ivec2(x + 1, y + 1), *word_start, 0);
-                font->PutChar(main_screen, ivec2(x, y), *word_start, c);
-                word_start++;
-                x += w;
-            }
+            std::string word(word_start, word_len);
+            font->PutString(main_screen, ivec2(x + 1, y + 1), word, 0);
+            font->PutString(main_screen, ivec2(x, y), word, c);
+            x += w * word_len;
         }
     }
     main_screen->SetClip(caa, cbb);
