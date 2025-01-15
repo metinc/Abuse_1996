@@ -42,8 +42,7 @@
       (progn (with_object (bg)
 			  (progn
 			    (setq special_power FAST_POWER)
-;			    (user_fun SET_FAST_TIME 360)
-			    (make_view_solid (find_rgb 255 255 255))))
+	        ))
 	     nil) T))
 
 (defun fast_cache (type) (list nil (list fast_image)))
