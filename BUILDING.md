@@ -4,7 +4,7 @@
 
 - SDL2
 - SDL2_mixer
-- [CMake 2.8.12 or later](http://www.cmake.org/)
+- [CMake 3.31.5 or later](http://www.cmake.org/)
 - GL libraries and headers (e.g., mesa, libgl, or similar) for OpenGL support
 - OpenCV library for extracting PCX images in SPEC files using `abuse-tool`
 
