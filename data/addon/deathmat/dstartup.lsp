@@ -1,4 +1,4 @@
-(load "config/levelset.lsp")  ; created by server setup
+(load "addon/deathmat/levelset.lsp")  ; created by server setup
 
 (setq current_net_level 0)
 
@@ -7,11 +7,11 @@
 
 (if (am_a_client)
     (progn
-      (load "config/cur_lev.lsp")
+      (load "addon/deathmat/cur_lev.lsp")
       (set_first_level (nth current_net_level net_levels)))
 
   ;; save the level we are so joining clients know which one to load
-  (open_file "config/cur_lev.lsp" "wb"
+  (open_file "addon/deathmat/cur_lev.lsp" "wb"
 	     (print `(setq current_net_level ,current_net_level))))
 
 
@@ -57,11 +57,11 @@
     (setq username "Myself"))
 
 ;(let ((input (nice_input "DEATHMATCH : Enter your name below" "Name" username)))
-;  (open_file "config/username.lsp" "wb"
+;  (open_file "addon/deathmat/username.lsp" "wb"
 ;	     (print (list 'setq 'username
 ;			  (concatenate 'string '(#\") input '(#\"))))))
 
-(local_load "config/username.lsp")
+(local_load "addon/deathmat/username.lsp")
 (set_login username)
 
 

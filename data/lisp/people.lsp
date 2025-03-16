@@ -306,7 +306,7 @@
 
 					     ;; save the level we are so joining clients know which one to load
 					     (if (not (am_a_client))
-						 (open_file "config/cur_lev.lsp" "wb"
+						 (open_file "addon/deathmat/cur_lev.lsp" "wb"
 							    (print `(setq current_net_level ,current_net_level))))
 
 					     (request_level_load (nth current_net_level net_levels))))
