@@ -372,8 +372,6 @@ static ico_button *load_icon(int num, int id, int x, int y, int &h, ifield *next
 
 ico_button *make_default_buttons(int x, int &y, ico_button *append_list)
 {
-    //AR main menu buttons, reenabled the credits button
-
     int h;
     int diff_on;
 
@@ -417,17 +415,12 @@ ico_button *make_default_buttons(int x, int &y, ico_button *append_list)
     ico_button *volume = load_icon(5, ID_VOLUME, x, y, h, NULL, "ic_volume");
     y += h;
 
-    //AR MP doesn't work, so I disabled the button, and with credits it doesn't fit at 320x200
-    /*ico_button *multiplayer = NULL;
-	if(prot)
-	{
-		multiplayer = load_icon(11,ID_NETWORKING,x,y,h,NULL,"ic_networking");
-		y += h;
-	}*/
-
-    //credits in full version
-    ico_button *sell = load_icon(2, ID_SHOW_SELL, x, y, h, NULL, "ic_sell");
-    y += h;
+    ico_button *multiplayer = NULL;
+    if (prot)
+    {
+        multiplayer = load_icon(11, ID_NETWORKING, x, y, h, NULL, "ic_networking");
+        y += h;
+    }
 
     ico_button *quit = load_icon(6, ID_QUIT, x, y, h, NULL, "ic_quit");
     y += h;
@@ -444,15 +437,13 @@ ico_button *make_default_buttons(int x, int &y, ico_button *append_list)
 
     color->next = volume;
 
-    /*if(prot)
-	{
-		volume->next = multiplayer;
-		multiplayer->next = sell;
-	}
-	else */
-    volume->next = sell;
-
-    sell->next = quit;
+    if (prot)
+    {
+        volume->next = multiplayer;
+        multiplayer->next = quit;
+    }
+    else
+        volume->next = quit;
 
     ico_button *list = append_list;
 
@@ -465,6 +456,30 @@ ico_button *make_default_buttons(int x, int &y, ico_button *append_list)
     }
     else
         list = start;
+
+    return list;
+}
+
+// Secondary menu buttons on the left side of the screen
+ico_button *make_default_buttons_secondary(int x, int &y, ico_button *append_list)
+{
+    int h;
+
+    //credits in full version
+    ico_button *sell = load_icon(2, ID_SHOW_SELL, x, y, h, NULL, "ic_sell");
+    y += h;
+
+    ico_button *list = append_list;
+
+    if (append_list)
+    {
+        while (append_list->next)
+            append_list = (ico_button *)append_list->next;
+
+        append_list->next = sell;
+    }
+    else
+        list = sell;
 
     return list;
 }
@@ -507,13 +522,14 @@ void main_menu()
     int button_w = 32;
     int button_h = 25;
     int padding_x = 1;
-    int move_up = 6; //6 menu buttons buttons by default
+    int buttons_count_right = 6; //6 menu buttons buttons by default
 
     if (current_level)
-        move_up++;
+        buttons_count_right++;
     if (show_load_icon())
-        move_up++;
-    //if(prot) move_up++;//multiplayer button
+        buttons_count_right++;
+
+    int move_up = buttons_count_right;
 
     if (settings.hires)
     {
@@ -532,6 +548,11 @@ void main_menu()
 
     ico_button *list = make_conditional_buttons(x, y);
     list = make_default_buttons(x, y, list);
+
+    int buttons_count_left = 1;
+    int move_up_left = (buttons_count_left * (settings.hires ? 39 : 25) / 2);
+    int y_left = yres / 2 - move_up_left;
+    make_default_buttons_secondary(0, y_left, list);
 
     //AR controller ui movement
     int mx, my; //mouse position
