@@ -657,9 +657,8 @@ int net_configuration::input() // pulls up dialog box and input fileds
                     error(symbol_str("not_there"));
 
                 prot->reset_find_list();
-                int i;
-                for (i = 0; i < total_games; i++) // delete all the addresses we found and stored
-                    delete game_addr[join_game];
+                for (int i = 0; i < total_games; i++) // delete all the addresses we found and stored
+                    delete game_addr[i];
             }
         }
         else if (ev.type == EV_MESSAGE && ev.message.id == NET_SERVER)
